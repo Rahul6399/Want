@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>A Special Question</title>
     <style>
         body {
@@ -15,33 +15,37 @@
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            overflow: hidden; /* Prevents scrollbars if the button moves far */
+            overflow: hidden; 
         }
 
         h1 {
             color: #d63384;
             font-size: 3rem;
             margin-bottom: 20px;
+            z-index: 2;
         }
 
         .container {
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            z-index: 1;
+            z-index: 2;
+            position: relative;
         }
 
         .buttons {
             margin-top: 30px;
-            position: relative;
-            height: 60px; /* Space for buttons */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-height: 100px;
         }
 
         button {
             padding: 15px 30px;
             font-size: 1.2rem;
-            margin: 0 10px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
@@ -51,30 +55,50 @@
         #yesBtn {
             background-color: #ff4d6d;
             color: white;
+            z-index: 2;
         }
 
         #noBtn {
             background-color: #6c757d;
             color: white;
-            position: absolute; /* Essential for moving the button */
-            transition: 0.1s ease; /* Makes the teleporting look smoother */
+            position: relative; /* Changed to relative for controlled jumping */
+            transition: all 0.2s ease; 
+            z-index: 3;
         }
 
-        .heart {
+        .heart-icon {
             color: #ff4d6d;
             font-size: 50px;
+        }
+
+        /* Falling Hearts Animation */
+        .falling-heart {
+            position: absolute;
+            top: -10%;
+            color: #ff4d6d;
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+            z-index: 0;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="heart">❤️</div>
+        <div class="heart-icon">❤️</div>
         <h1>Will you be my Valentine?</h1>
         
         <div class="buttons">
             <button id="yesBtn" onclick="location.href='success.html'">Yes</button>
-            <button id="noBtn" onmouseover="moveButton()" onclick="wrongAnswer()">No</button>
+            <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()" onclick="wrongAnswer()">No</button>
         </div>
     </div>
 
@@ -82,22 +106,38 @@
         const noBtn = document.getElementById('noBtn');
 
         function moveButton() {
-            // Get random coordinates within the window
-            // Subtracting button width/height so it doesn't go off-screen
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            // This range determines how many "spaces" away it jumps (in pixels)
+            const range = 150; 
+            
+            // Calculate a random direction and distance
+            const randomX = (Math.random() - 0.5) * range * 2;
+            const randomY = (Math.random() - 0.5) * range * 2;
 
-            noBtn.style.left = `${x}px`;
-            noBtn.style.top = `${y}px`;
+            // Apply the movement as a translation from its original spot
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
         }
 
         function wrongAnswer() {
-            // In case they are fast enough to click it!
-            alert("Wow, you're fast! But still... wrong answer. Try again! ❤️");
+            alert("Wrong answer! Try again. ❤️");
         }
+
+        // Script to create falling hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('falling-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 300);
     </script>
 
-
-    
 </body>
 </html>
