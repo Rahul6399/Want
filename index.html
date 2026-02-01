@@ -6,7 +6,7 @@
     <title>A Special Question</title>
     <style>
         body {
-            background-color: #ffeef2; /* Soft Pink */
+            background-color: #ffeef2;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -15,6 +15,7 @@
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
+            overflow: hidden; /* Prevents scrollbars if the button moves far */
         }
 
         h1 {
@@ -28,10 +29,13 @@
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 1;
         }
 
         .buttons {
             margin-top: 30px;
+            position: relative;
+            height: 60px; /* Space for buttons */
         }
 
         button {
@@ -49,14 +53,11 @@
             color: white;
         }
 
-        #yesBtn:hover {
-            background-color: #c9184a;
-            transform: scale(1.1);
-        }
-
         #noBtn {
             background-color: #6c757d;
             color: white;
+            position: absolute; /* Essential for moving the button */
+            transition: 0.1s ease; /* Makes the teleporting look smoother */
         }
 
         .heart {
@@ -73,13 +74,26 @@
         
         <div class="buttons">
             <button id="yesBtn" onclick="location.href='success.html'">Yes</button>
-            <button id="noBtn" onclick="wrongAnswer()">No</button>
+            <button id="noBtn" onmouseover="moveButton()" onclick="wrongAnswer()">No</button>
         </div>
     </div>
 
     <script>
+        const noBtn = document.getElementById('noBtn');
+
+        function moveButton() {
+            // Get random coordinates within the window
+            // Subtracting button width/height so it doesn't go off-screen
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+
         function wrongAnswer() {
-            alert("Wrong answer! Try again. ❤️");
+            // In case they are fast enough to click it!
+            alert("Wow, you're fast! But still... wrong answer. Try again! ❤️");
         }
     </script>
 
