@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question</title>
+    <style>
+        body {
+            background-color: #ffeef2; /* Soft Pink */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            margin: 0 10px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        #yesBtn:hover {
+            background-color: #c9184a;
+            transform: scale(1.1);
+        }
+
+        #noBtn {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .heart {
+            color: #ff4d6d;
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="heart">❤️</div>
+        <h1>Will you be my Valentine?</h1>
+        
+        <div class="buttons">
+            <button id="yesBtn" onclick="location.href='success.html'">Yes</button>
+            <button id="noBtn" onclick="wrongAnswer()">No</button>
+        </div>
+    </div>
+
+    <script>
+        function wrongAnswer() {
+            alert("Wrong answer! Try again. ❤️");
+        }
+    </script>
+
+</body>
+</html>
