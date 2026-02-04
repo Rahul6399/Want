@@ -6,15 +6,7 @@
     <title>A Special Question</title>
     <style>
         body {
-            /* --- BACKGROUND GIF SETUP --- */
-            /* Replace the URL inside the quotes below with your own GIF link if you want a different one */
-            background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTVwdXMyY3d5amZ6eG1vYm92am5tY3N2ZHNwYm13c253YjZ1ZXp4cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRv0ThflsHCqDrG/giphy.gif');
-            background-size: cover;   /* Ensures the GIF covers the whole screen without stretching weirdly */
-            background-repeat: no-repeat; /* Prevents the GIF from repeating in tiles */
-            background-position: center; /* Centers the GIF */
-            background-attachment: fixed; /* The background stays still if the page scrolls */
-            /* --------------------------- */
-
+            background-color: #ffeef2;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -34,11 +26,10 @@
         }
 
         .container {
-            /* Made the white box slightly less transparent so text is readable against the GIF */
-            background: rgba(255, 255, 255, 0.95); 
+            background: rgba(255, 255, 255, 0.9);
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Made shadow slightly darker for contrast */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             z-index: 2;
             position: relative;
         }
@@ -80,7 +71,7 @@
             font-size: 50px;
         }
 
-        /* Falling Hearts Animation - Kept this as it looks nice layered over the GIF */
+        /* Falling Hearts Animation */
         .falling-heart {
             position: absolute;
             top: -10%;
