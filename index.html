@@ -3,21 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>The Special Question</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <title>A Special Question</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
-            /* --- NEW COMPATIBLE VIBRANT GIF --- */
-            background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3NueXNqZTRnb3FmaXNreXl6eG9tZTR0eHN4ZTRreGZ6Z3N6Z3Z5ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L8G2fXm996gIuS7Q5N/giphy.gif');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
-            
+            /* --- BACKGROUND GIF SETUP --- */
+            /* Replace the URL inside the quotes below with your own GIF link if you want a different one */
+            background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTVwdXMyY3d5amZ6eG1vYm92am5tY3N2ZHNwYm13c253YjZ1ZXp4cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRv0ThflsHCqDrG/giphy.gif');
+            background-size: cover;   /* Ensures the GIF covers the whole screen without stretching weirdly */
+            background-repeat: no-repeat; /* Prevents the GIF from repeating in tiles */
+            background-position: center; /* Centers the GIF */
+            background-attachment: fixed; /* The background stays still if the page scrolls */
+            /* --------------------------- */
+
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -30,75 +27,69 @@
         }
 
         h1 {
-            font-family: 'Dancing Script', cursive;
-            color: #ff0054; /* Vibrant pink */
-            font-size: clamp(2rem, 8vw, 3.5rem); /* Adjusts size based on screen width */
-            line-height: 1.2;
+            color: #d63384;
+            font-size: 3rem;
             margin-bottom: 20px;
             z-index: 2;
-            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.9); 
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(214, 51, 132, 0.4);
+            /* Made the white box slightly less transparent so text is readable against the GIF */
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Made shadow slightly darker for contrast */
             z-index: 2;
             position: relative;
-            max-width: 90%;
-            width: 400px; /* Base width */
         }
 
         .buttons {
-            margin-top: 20px;
+            margin-top: 30px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
-            min-height: 150px; /* Room for the button to jump */
+            gap: 20px;
+            min-height: 100px;
         }
 
         button {
             padding: 15px 30px;
             font-size: 1.2rem;
-            font-weight: bold;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: transform 0.2s;
-            touch-action: manipulation; /* Prevents double-tap zoom on phones */
         }
 
         #yesBtn {
             background-color: #ff4d6d;
             color: white;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            z-index: 2;
         }
 
         #noBtn {
-            background-color: #a2a2a2;
+            background-color: #6c757d;
             color: white;
-            position: relative;
+            position: relative; /* Changed to relative for controlled jumping */
             transition: all 0.2s ease; 
             z-index: 3;
         }
 
         .heart-icon {
-            font-size: 60px;
-            margin-bottom: 10px;
-            display: block;
+            color: #ff4d6d;
+            font-size: 50px;
         }
 
-        /* White Falling Hearts */
+        /* Falling Hearts Animation - Kept this as it looks nice layered over the GIF */
         .falling-heart {
             position: absolute;
             top: -10%;
-            color: white;
+            color: #ff4d6d;
+            font-size: 20px;
             user-select: none;
             pointer-events: none;
             animation: fall linear forwards;
-            z-index: 1; 
+            z-index: 0;
         }
 
         @keyframes fall {
@@ -111,11 +102,11 @@
 <body>
 
     <div class="container">
-        <div class="heart-icon">💝</div>
+        <div class="heart-icon">❤️</div>
         <h1>Will you be my Valentine?</h1>
         
         <div class="buttons">
-            <button id="yesBtn" onclick="location.href='success.html'">Yes!</button>
+            <button id="yesBtn" onclick="location.href='success.html'">Yes</button>
             <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()" onclick="wrongAnswer()">No</button>
         </div>
     </div>
@@ -124,29 +115,29 @@
         const noBtn = document.getElementById('noBtn');
 
         function moveButton() {
-            // Smaller range for mobile screens to keep it visible
-            const range = window.innerWidth < 600 ? 80 : 130;
+            // This range determines how many "spaces" away it jumps (in pixels)
+            const range = 150; 
             
-            const randomX = (Math.random() - 0.5) * range * 2.5;
-            const randomY = (Math.random() - 0.5) * range * 2.5;
+            // Calculate a random direction and distance
+            const randomX = (Math.random() - 0.5) * range * 2;
+            const randomY = (Math.random() - 0.5) * range * 2;
 
+            // Apply the movement as a translation from its original spot
             noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
         }
 
         function wrongAnswer() {
-            alert("Oopsie,Nice try! But you're stuck with me. Try again!");
+            alert("Wrong answer! Try again. ❤️");
         }
 
+        // Script to create falling hearts
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('falling-heart');
-            heart.innerHTML = '🤍'; // White heart blizzard
-            
+            heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = Math.random() * 15 + 10 + 'px'; 
-            heart.style.animationDuration = Math.random() * 2 + 3 + 's'; 
-            heart.style.opacity = Math.random() * 0.7 + 0.3; 
-            
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random();
             document.body.appendChild(heart);
 
             setTimeout(() => {
@@ -154,10 +145,8 @@
             }, 5000);
         }
 
-        // High frequency white heart blizzard
-        setInterval(createHeart, 150);
+        setInterval(createHeart, 300);
     </script>
 
 </body>
 </html>
-
