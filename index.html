@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>A Special Question</title>
+    <title>The Special Question</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            /* --- VIBRANT BACKGROUND GIF --- */
-            background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3NueXNqZTRnb3FmaXNreXl6eG9tZTR0eHN4ZTRreGZ6Z3N6Z3Z5ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L8G2fXm996gIuS7Q5N/giphy.gif');
+            /* --- NEW COMPATIBLE VIBRANT GIF --- */
+            background-image: url('https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1dnFmcG9vcmFnbm03N201eThtZzB2Ym1jNTFqYmx2YmE3N2I0dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/m85mshst8K7Ek/giphy.gif');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -27,41 +31,43 @@
 
         h1 {
             font-family: 'Dancing Script', cursive;
-            color: #ff0054; /* More vibrant hot pink */
-            font-size: 3.5rem;
+            color: #ff0054; /* Vibrant pink */
+            font-size: clamp(2rem, 8vw, 3.5rem); /* Adjusts size based on screen width */
             line-height: 1.2;
             margin-bottom: 20px;
             z-index: 2;
-            text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.9); 
+            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.9); 
         }
 
         .container {
             background: rgba(255, 255, 255, 0.9);
-            padding: 40px;
+            padding: 30px;
             border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(214, 51, 132, 0.3);
+            box-shadow: 0 15px 35px rgba(214, 51, 132, 0.4);
             z-index: 2;
             position: relative;
-            max-width: 80%;
+            max-width: 90%;
+            width: 400px; /* Base width */
         }
 
         .buttons {
-            margin-top: 30px;
+            margin-top: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
-            min-height: 120px; /* Increased to give button more room to 'dance' */
+            gap: 15px;
+            min-height: 150px; /* Room for the button to jump */
         }
 
         button {
-            padding: 15px 35px;
-            font-size: 1.3rem;
+            padding: 15px 30px;
+            font-size: 1.2rem;
             font-weight: bold;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s;
+            touch-action: manipulation; /* Prevents double-tap zoom on phones */
         }
 
         #yesBtn {
@@ -79,21 +85,20 @@
         }
 
         .heart-icon {
-            font-size: 70px; /* Slightly larger for the ribbon heart */
+            font-size: 60px;
             margin-bottom: 10px;
             display: block;
         }
 
-        /* Falling Hearts Animation */
+        /* White Falling Hearts */
         .falling-heart {
             position: absolute;
             top: -10%;
-            color: #ff4d6d;
-            font-size: 20px;
+            color: white;
             user-select: none;
             pointer-events: none;
             animation: fall linear forwards;
-            z-index: 0;
+            z-index: 1; 
         }
 
         @keyframes fall {
@@ -119,7 +124,8 @@
         const noBtn = document.getElementById('noBtn');
 
         function moveButton() {
-            const range = 130; // Keeps it closer but still annoying to catch!
+            // Smaller range for mobile screens to keep it visible
+            const range = window.innerWidth < 600 ? 80 : 130;
             
             const randomX = (Math.random() - 0.5) * range * 2.5;
             const randomY = (Math.random() - 0.5) * range * 2.5;
@@ -128,24 +134,27 @@
         }
 
         function wrongAnswer() {
-            alert("Nice try! But you're stuck with me. ❤️ Try again!");
+            alert("Oopsie,Nice try! But you're stuck with me. Try again!");
         }
 
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('falling-heart');
-            heart.innerHTML = '❤️';
+            heart.innerHTML = '🤍'; // White heart blizzard
+            
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-            heart.style.opacity = Math.random();
+            heart.style.fontSize = Math.random() * 15 + 10 + 'px'; 
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's'; 
+            heart.style.opacity = Math.random() * 0.7 + 0.3; 
+            
             document.body.appendChild(heart);
 
-            // Re-enabled removal to prevent phone lag!
             setTimeout(() => {
                 heart.remove();
             }, 5000);
         }
 
+        // High frequency white heart blizzard
         setInterval(createHeart, 150);
     </script>
 
