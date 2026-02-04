@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>A Special Question</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
             /* --- BACKGROUND GIF SETUP --- */
@@ -26,12 +27,15 @@
             overflow: hidden; 
         }
 
-        h1 {
-            color: #d63384;
-            font-size: 3rem;
-            margin-bottom: 20px;
-            z-index: 2;
-        }
+       h1 {
+    font-family: 'Dancing Script', cursive; /* The new cursive font */
+    color: #d63384;
+    font-size: 4rem; /* Cursive often looks smaller, so we bumped the size */
+    margin-bottom: 20px;
+    z-index: 2;
+    /* This text-shadow makes the cursive "pop" against your GIF background */
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8); 
+}
 
         .container {
             /* Made the white box slightly less transparent so text is readable against the GIF */
@@ -103,7 +107,7 @@
 
     <div class="container">
         <div class="heart-icon">❤️</div>
-        <h1>Will you be my Valentine?</h1>
+        <h1>Will you be my Valentine ?</h1>
         
         <div class="buttons">
             <button id="yesBtn" onclick="location.href='success.html'">Yes</button>
@@ -127,7 +131,7 @@
         }
 
         function wrongAnswer() {
-            alert("Wrong answer! Try again. ❤️");
+            alert("Wrong answer! Try again. 😠");
         }
 
         // Script to create falling hearts
@@ -140,9 +144,9 @@
             heart.style.opacity = Math.random();
             document.body.appendChild(heart);
 
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
+           // setTimeout(() => {
+            //    heart.remove();
+            //}, 5000);
         }
 
         setInterval(createHeart, 300);
@@ -150,3 +154,4 @@
 
 </body>
 </html>
+
