@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Yay! ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <title>It's a Date! ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@500&display=swap" rel="stylesheet">
     <style>
         body {
-            /* Background matches index.html for a smooth transition */
-            background-image: url('https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1dnFmcG9vcmFnbm03N201eThtZzB2Ym1jNTFqYmx2YmE3N2I0dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/m85mshst8K7Ek/giphy.gif');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
+            /* --- SUBTLE PINK GRADIENT --- */
+            background: radial-gradient(circle, #fff0f3 0%, #ffccd5 100%);
+            /* ---------------------------- */
             
             display: flex;
             flex-direction: column;
@@ -20,48 +17,51 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Quicksand', sans-serif;
             text-align: center;
             overflow: hidden; 
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.92);
-            padding: 30px;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(214, 51, 132, 0.4);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px); /* Adds a modern "glass" effect */
+            padding: 40px;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.2);
             z-index: 2;
             position: relative;
             max-width: 90%;
-            width: 450px;
+            width: 420px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
         }
 
-        /* --- STYLING FOR YOUR REPO GIF --- */
         .repo-gif {
             width: 100%;
-            max-width: 300px; /* Adjust size as needed */
-            border-radius: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 280px;
+            border-radius: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
             color: #ff0054;
-            font-size: clamp(2.5rem, 10vw, 3.5rem);
-            margin: 10px 0;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+            font-size: clamp(2.8rem, 12vw, 4rem);
+            margin: 0;
+            line-height: 1;
         }
 
         p {
             font-size: 1.2rem;
             color: #d63384;
+            margin: 15px 0;
             font-weight: 500;
-            margin-bottom: 10px;
         }
 
         .emoji {
-            font-size: 60px;
+            font-size: 50px;
+            display: block;
+            margin-top: 10px;
         }
 
         /* White Heart Blizzard */
@@ -87,14 +87,13 @@
     <div class="container">
         <img src="1000223315.gif" alt="Celebration GIF" class="repo-gif">
         
-        <h1>Yay! 🎉</h1>
-        <p>I am very happy for you for choosing the correct answer!</p>
+        <h1>It's a Date!</h1>
+        <p>You've just made me the happiest person in the world. I can't wait! ❤️</p>
         
-        <div class="emoji">🥰</div>
+        <span class="emoji">🥰✨</span>
     </div>
 
     <script>
-        // White heart blizzard logic
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('falling-heart');
@@ -103,7 +102,7 @@
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.fontSize = Math.random() * 15 + 10 + 'px'; 
             heart.style.animationDuration = Math.random() * 2 + 3 + 's'; 
-            heart.style.opacity = Math.random() * 0.7 + 0.3; 
+            heart.style.opacity = Math.random() * 0.8 + 0.2; 
             
             document.body.appendChild(heart);
 
@@ -112,7 +111,6 @@
             }, 5000);
         }
 
-        // Keep it at "Blizzard" speed
         setInterval(createHeart, 80);
     </script>
 
